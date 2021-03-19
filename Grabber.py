@@ -1,12 +1,14 @@
+#imports the two modules we will need. 
 import requests
 from bs4 import BeautifulSoup
 
+#Add your own link in the quotation marks!
 source = requests.get('https://www.ebay.com/sch/i.html?_from=R40&_nkw=Iphone&_sacat=0&LH_TitleDesc=0&_sop=1&LH_Auction=1&rt=nc&Model=Apple%2520iPhone%25208%7CApple%2520iPhone%25207%7CApple%2520iPhone%25208%2520Plus&_dcat=9355').text
 soup = BeautifulSoup(source, 'lxml')
 items = soup.find('li', class_='s-item')
 
 
-
+#Goes to specifc parts of the HTML, scrapes out the item, and then prints it in the results. Loops through all the pages. 
 for items in soup.find_all('li', class_='s-item'):
     try:
         item_title = items.find('h3', class_='s-item__title').text
